@@ -11,17 +11,24 @@ fn main() {
 
 
 fn read_username_from_file() -> Result<String, io::Error>{
-    let username_file_result = File::open("hello.txt");
+    //Short form of doing the same as below using '?' mark
 
-    let mut username_file = match username_file_result {
-        Ok(file) => file,
-        Err(error) => return Err(error),
-    };
+    // let username_file_result = File::open("hello.txt");
 
+    // let mut username_file = match username_file_result {
+    //     Ok(file) => file,
+    //     Err(error) => return Err(error),
+    // };
+
+    // let mut username = String::new();
+
+    // match username_file.read_to_string(&mut username) {
+    //     Ok(_) => Ok(username),
+    //     Err(error) => Err(error),
+    // }
+ 
+    let mut username_file = File::open("hello.txt")?;
     let mut username = String::new();
-
-    match username_file.read_to_string(&mut username) {
-        Ok(_) => Ok(username),
-        Err(error) => Err(error),
-    }
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
 }
